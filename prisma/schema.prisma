@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Student {
+  id         String   @id @default(uuid())
+  name       String
+  email      String   @unique
+  password   String
+  department String
+  year       String
+  rollNumber String   @unique
+  createdAt  DateTime @default(now())
+
+  grievances Grievance[]
+}
+
+model Grievance {
+  id              String   @id @default(uuid())
+  studentId       String
+  studentName     String?
+  studentEmail    String?
+  studentDept     String?
+  rollNumber      String?
+  year            String?
+  
+  category        String
+  title           String
+  description     String
+  attachments     String   @default("[]") // Assuming array stored as JSON string
+  
+  urgency         Int      @default(3)
+  urgency_reason  String?
+  is_duplicate    Boolean  @default(false)
+  duplicate_group String?
+  summary         String?
+  
+  status          String   @default("Received")
+  status_history  String   @default("[]") // Assuming array stored as JSON string
+  
+  createdAt       DateTime @default(now())
+
+  student         Student  @relation(fields: [studentId], references: [id])
+}
+
+model Admin {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  password  String
+  name      String
+  role      String   @default("category")
+  category  String?
+  createdAt DateTime @default(now())
+}

@@ -1,0 +1,14 @@
+node_modules
+.next
+out
+
+# Keep environment variables out of version control
+.env
+.env.local
+.env.production
+
+# Prisma generated
+/app/generated/prisma
+
+# Debug logs
+npm-debug.log*
