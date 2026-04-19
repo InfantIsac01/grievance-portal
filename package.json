@@ -15,7 +15,8 @@
     "next": "15.2.8",
     "pg": "^8.20.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "resend": "^6.12.0"
   },
   "devDependencies": {
     "autoprefixer": "^10",
